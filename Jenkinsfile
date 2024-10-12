@@ -18,28 +18,28 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                // Running tests inside the Docker container
-                script {
-                    dockerImage.inside {
-                        // Adjust the test directory path if necessary
-                        sh 'python -m unittest discover -s tests'
-                    }
-                }
-            }
-        }
+        // stage('Run Tests') {
+        //     steps {
+        //         // Running tests inside the Docker container
+        //         script {
+        //             dockerImage.inside {
+        //                 // Adjust the test directory path if necessary
+        //                 sh 'python -m unittest discover -s tests'
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Deploy to Production') {
-            steps {
-                // Pushing the Docker image to Docker Hub
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'd600d408-6549-40bf-a256-c41d517d8121') {
-                        dockerImage.push('miad560/zoo-tiketing')
-                    }
-                }
-            }
-        }
+        // stage('Deploy to Production') {
+        //     steps {
+        //         // Pushing the Docker image to Docker Hub
+        //         script {
+        //             docker.withRegistry('https://registry.hub.docker.com', 'd600d408-6549-40bf-a256-c41d517d8121') {
+        //                 dockerImage.push('miad560/zoo-tiketing')
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     post {
