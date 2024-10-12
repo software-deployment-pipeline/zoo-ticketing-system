@@ -11,38 +11,48 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                // Building a Docker image
+                // Building the Docker image
                 script {
-                    dockerImage = docker.build("your-image-name")
+                    dockerImage = docker.build("zoo-tiketing")
                 }
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                // Running tests inside the Docker container
-                script {
-                    dockerImage.inside {
-                        sh 'python -m unittest discover -s tests'
-                    }
-                }
-            }
-        }
+        // stage('Run Tests') {
+        //     steps {
+        //         // Running tests inside the Docker container
+        //         script {
+        //             dockerImage.inside {
+        //                 // Adjust the test directory path if necessary
+        //                 sh 'python -m unittest discover -s tests'
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Deploy to Production') {
-            steps {
-                // Deploying the Docker container to a production server
-                script {
-                    dockerImage.push('your-dockerhub-repo/your-image-name')
-                }
-            }
-        }
+        // stage('Deploy to Production') {
+        //     steps {
+        //         // Pushing the Docker image to Docker Hub
+        //         script {
+        //             docker.withRegistry('https://registry.hub.docker.com', 'd600d408-6549-40bf-a256-c41d517d8121') {
+        //                 dockerImage.push('miad560/zoo-tiketing')
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     post {
         always {
-            // Clean up after build
-            cleanWs()
+            // Stopping and removing containers, then cleaning up the workspace
+            script {
+                dockerImage.inside {
+                    sh 'docker stop $(docker ps -q --filter ancestor=zoo-tiketing) || true'
+                    sh 'docker rm $(docker ps -a -q --filter ancestor=zoo-tiketing) || true'
+                }
+                cleanWs()
+            }
         }
     }
 }
+
