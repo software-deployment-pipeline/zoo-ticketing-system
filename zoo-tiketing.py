@@ -48,7 +48,7 @@ class ZooTicketing():
 def main():
     zoo_ticketing = ZooTicketing()
     buy_more = True
-    print("Hellooooo, welcome to Swinburne Zoo. Please select ticket.")
+    print("Hello bro, welcome to Swinburne Zoo. Please select ticket.")
     print()
 
     while buy_more:
