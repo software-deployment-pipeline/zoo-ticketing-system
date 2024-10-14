@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from app.zoo_ticketing import main
+from zoo_ticketing import main
 
 class TestIntegration(unittest.TestCase):
 
