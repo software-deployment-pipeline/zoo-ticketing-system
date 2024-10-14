@@ -81,10 +81,10 @@ pipeline {
                                 docker rm zoo-ticketing || true
 
                                 # Pull new Docker image
-                                docker pull felixjoshua/zoo-ticketing:latest
+                                docker pull felixjoshua/zoo_ticketing:latest
 
                                 # Run the new Docker image
-                                docker run -d -p 80:8080 --name zoo-ticketing your-docker-repo/zoo-ticketing:latest
+                                docker run exec -it felixjoshua/zoo_ticketing:latest /bin/bash
 
                                 echo "Deployment completed"
                             EOF
@@ -92,7 +92,7 @@ pipeline {
                     }
                 }
             }
-        }
+        
     }
 
     post {
