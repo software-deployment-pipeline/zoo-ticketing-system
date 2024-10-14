@@ -84,7 +84,7 @@ pipeline {
                                 docker pull felixjoshua/zoo_ticketing:latest
 
                                 # Run the new Docker image
-                                docker run exec -it felixjoshua/zoo_ticketing:latest
+                                docker run -it felixjoshua/zoo_ticketing:latest
 
                                 echo "Deployment completed"
                             EOF
