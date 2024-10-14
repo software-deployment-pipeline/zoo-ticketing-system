@@ -66,7 +66,7 @@ pipeline {
                         }
                     }
                 }
-            }
+            
         }
 
         stage('Deploy to Production') {
@@ -92,7 +92,7 @@ pipeline {
                     }
                 }
             }
-        
+        }
     }
 
     post {
