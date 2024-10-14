@@ -86,4 +86,5 @@ def main():
     print(f"Total Cost: ${zoo_ticketing.get_total_cost()}\n")
 
 
-main()
+if __name__ == "__main__":
+    main()

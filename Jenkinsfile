@@ -14,20 +14,29 @@ pipeline {
                 echo 'Building the application...'
                 // Building a Docker image
                 script {
-                    dockerImage = docker.build("zoo-ticketing")
+                    dockerImage = docker.build("zoo_ticketing")
                 }
             }
         }
 
-        stage('Run Tests') {
+         stage('Run Unit Tests') {
             steps {
-                echo 'Running some tests...'
-                // Running tests inside the Docker container
-                // script {
-                //     dockerImage.inside {
-                //         sh 'python -m unittest discover -s tests'
-                //     }
-                // }
+                echo 'Running unit tests...'
+                script {
+                    dockerImage.inside {
+                        sh 'python -m unittest discover -s tests/unit'
+                    }
+                }
+            }
+        }
+
+        stage('Run Integration Tests') {
+            steps {
+                echo 'Running integration tests...'
+                script {
+                        sh 'python zoo-ticketing.py > output.txt'  // Run the console app and save output
+                        sh 'python -m unittest discover -s tests/integration'  // Run integration tests
+                }
             }
         }
 

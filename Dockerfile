@@ -7,6 +7,6 @@ WORKDIR /app
 
 # Copy the current directory contents into the container at /app
 COPY . /app
-
+RUN python -m unittest discover -s tests
 
 CMD ["python", "zoo-ticketing.py"]
