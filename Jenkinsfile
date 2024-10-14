@@ -28,11 +28,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            // Archive test results if available
-            junit '**/tests/*.xml' // Remove this if no XML reports are generated
-        }
-    }
 }
