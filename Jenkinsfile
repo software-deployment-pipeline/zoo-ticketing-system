@@ -4,8 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                // Add GitHub's SSH key to known_hosts
-                sh 'ssh-keyscan github.com >> ~/.ssh/known_hosts'
+
                 // Cloning the GitHub repository
                 
                 git branch: 'development-felix', url: 'git@github.com:software-deployment-pipeline/zoo-ticketing-system.git'
