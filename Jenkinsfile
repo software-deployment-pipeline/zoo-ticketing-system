@@ -21,9 +21,8 @@ pipeline {
             steps {
                 echo 'Running unit tests...'
                 script {
-                    // Mount workspace to container using Docker on Windows
-                    dockerImage.inside("-v /c/Users/YourUser/Jenkins:/workspace") {
-                        sh 'cd /workspace && python -m unittest discover -s tests'
+                    dockerImage.inside {
+                        sh 'python -m unittest discover -s tests'
                     }
                 }
             }
