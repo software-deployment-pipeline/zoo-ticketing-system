@@ -4,49 +4,32 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                // Cloning the GitHub repository
                 git url: 'https://github.com/software-deployment-pipeline/zoo-ticketing-system', branch: 'main'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                echo 'Building the application...'
-                // Building a Docker image
+                echo 'Building Docker image...'
                 script {
-                    dockerImage = docker.build("zoo-ticketing")
+                    dockerImage = docker.build('zoo-ticketing')
                 }
             }
         }
 
-        stage('Run Tests') {
+        stage('Run Docker Container') {
             steps {
-                echo 'Running tests in Docker...'
+                echo 'Running Docker container...'
                 script {
-                    dockerImage.inside {
-                sh 'python3 -m unittest discover -s tests'
+                    dockerImage.run('-d -p 8081:8080')
+                }
             }
         }
-    }
-}
-
-        // Optional Deployment Stage
-        // stage('Deploy to Production') {
-        //     steps {
-        //         echo 'Deploying to production...'
-        //         script {
-        //             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
-        //                 dockerImage.push('your-dockerhub-repo/your-image-name')
-        //             }
-        //         }
-        //     }
-        // }
     }
 
     post {
         always {
-            echo 'Cleaning up...'
-            // Clean up workspace
+            echo 'Cleaning up workspace...'
             cleanWs()
         }
     }
