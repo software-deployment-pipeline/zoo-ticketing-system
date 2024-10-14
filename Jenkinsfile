@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/software-deployment-pipeline/zoo-ticketing-system', branch: 'main'
+                git url: 'https://github.com/software-deployment-pipeline/zoo-ticketing-system', branch: 'test-axel'
             }
         }
 
@@ -19,22 +19,12 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                echo 'Running unit tests...'
+                echo 'Running tests...'
                 script {
-                    // Use the jenkins pipeline@tmp directory for mounting
-                    dockerImage.inside('-v /c/Users/LENOVO/AppData/Local/Jenkins/.jenkins/workspace/jenkins pipeline@tmp:/workspace') {
-                        // Adjust command for Windows
-                        bat 'python -m unittest discover -s tests'
+                    dockerImage.inside {
+                        // Run the tests in the 'tests' folder
+                        sh 'pytest tests/test_sample.py'
                     }
-                }
-            }
-        }
-
-        stage('Run Docker Container') {
-            steps {
-                echo 'Running Docker container...'
-                script {
-                    dockerImage.run('-d -p 8081:8080')
                 }
             }
         }
@@ -42,8 +32,8 @@ pipeline {
 
     post {
         always {
-            echo 'Cleaning up workspace...'
-            cleanWs()
+            // Archive test results or any other necessary cleanup
+            junit '**/tests/*.xml' // Comment out if you don't generate XML reports
         }
     }
 }
