@@ -22,20 +22,24 @@ pipeline {
         stage('Run Tests') {
             steps {
                 echo 'Running some tests...'
-                // Running tests inside the Docker container
-                // script {
-                //     dockerImage.inside {
-                //         sh 'python -m unittest discover -s tests'
-                //     }
-                // }
+                // Uncomment the following lines if you have tests inside the container
+                // Ensure you have Python and the right libraries installed in the Dockerfile
+                script {
+                    dockerImage.inside {
+                        sh 'python3 -m unittest discover -s tests'
+                    }
+                }
             }
         }
 
+        // Optional Deployment Stage
         // stage('Deploy to Production') {
         //     steps {
-        //         // Deploying the Docker container to a production server
+        //         echo 'Deploying to production...'
         //         script {
-        //             dockerImage.push('your-dockerhub-repo/your-image-name')
+        //             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
+        //                 dockerImage.push('your-dockerhub-repo/your-image-name')
+        //             }
         //         }
         //     }
         // }
@@ -43,7 +47,8 @@ pipeline {
 
     post {
         always {
-            // Clean up after build
+            echo 'Cleaning up...'
+            // Clean up workspace
             cleanWs()
         }
     }
