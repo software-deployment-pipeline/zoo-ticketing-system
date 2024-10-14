@@ -15,8 +15,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                echo 'Building the application...'
-                // Building a Docker image
+                echo 'Building Docker image...'
                 script {
                     dockerImage = docker.build("zoo_ticketing")
                 }
@@ -75,8 +74,7 @@ pipeline {
 
     post {
         always {
-            echo 'Cleaning up...'
-            // Clean up workspace
+            echo 'Cleaning up workspace...'
             cleanWs()
         }
     }
