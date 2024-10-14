@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/software-deployment-pipeline/zoo-ticketing-system', branch: 'main'
+                git url: 'https://github.com/software-deployment-pipeline/zoo-ticketing-system', branch: 'test-axel'
             }
         }
 
