@@ -5,7 +5,8 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Cloning the GitHub repository
-                git url: 'https://github.com/software-deployment-pipeline/zoo-ticketing-system', branch: 'development-felix'
+                git branch: 'development', url: 'git@github.com:software-deployment-pipeline/zoo-ticketing-system.git'
+
             }
         }
 
