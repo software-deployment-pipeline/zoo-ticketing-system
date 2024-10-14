@@ -84,7 +84,6 @@ pipeline {
                                 docker pull felixjoshua/zoo_ticketing:latest
 
                                 echo "Deployment completed"
-                            EOF
                         '''
                     }
                 }
