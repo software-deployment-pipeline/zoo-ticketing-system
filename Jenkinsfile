@@ -23,7 +23,7 @@ pipeline {
                 script {
                     // Mount workspace to container using Docker on Windows
                     dockerImage.inside{
-                        sh 'pythn -m unittest discover -s tests'
+                        sh 'python -m unittest discover -s tests'
                     }
                 }
             }
