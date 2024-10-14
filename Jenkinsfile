@@ -24,7 +24,7 @@ pipeline {
                     // Mount workspace to container using Docker on Windows
                     dockerImage.inside("-v /c/Users/YourUser/Jenkins:/workspace") {
                         // Use 'bat' if this is a Windows-based container; otherwise 'sh' for Linux
-                        sh 'cd /workspace && python -m unittest discover -s tests'
+                        bat 'cd /workspace && python -m unittest discover -s tests'
                     }
                 }
             }
