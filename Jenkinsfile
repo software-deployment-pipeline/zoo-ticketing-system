@@ -45,11 +45,11 @@ pipeline {
             steps {
                 echo 'Merging into main...'
                 script {
-                    dockerImage.inside {
+
                         sh 'git checkout main'
                         sh 'git merge origin/development-felix'                
                         sh 'git push origin main'
-                    }
+                    
                 }
             }
         }
