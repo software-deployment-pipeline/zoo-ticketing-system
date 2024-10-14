@@ -45,10 +45,11 @@ pipeline {
             steps {
                 echo 'Merging into main...'
                 script {
-
-                        sh 'git checkout main'
-                        sh 'git merge origin/development-felix'                
-                        sh 'git push origin main'
+                    sh 'git config --global user.email "jenkins@example.com"'
+                    sh 'git config --global user.name "Jenkins CI"'
+                    sh 'git checkout main'
+                    sh 'git merge origin/development-felix'                
+                    sh 'git push origin main'
                     
                 }
             }
