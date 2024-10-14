@@ -21,10 +21,9 @@ pipeline {
             steps {
                 echo 'Running unit tests...'
                 script {
-                    // Mount workspace to container using Docker on Windows
-                    dockerImage.inside("-v /c/Users/LENOVO/Jenkins:/workspace") {
-                        // Use 'bat' if this is a Windows-based container; otherwise 'sh' for Linux
-                        bat 'cd /workspace && python -m unittest discover -s tests'
+                    // Use the jenkins pipeline@tmp directory for mounting
+                    dockerImage.inside('-v "C:/Users/LENOVO/AppData/Local/Jenkins/.jenkins/workspace/jenkins pipeline@tmp:/workspace"') {
+                        sh 'python -m unittest discover -s tests'
                     }
                 }
             }
@@ -43,7 +42,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up workspace...'
-            cleanWs() // Optional, remove if you want to keep the workspace for future reference
+            cleanWs()
         }
     }
 }
