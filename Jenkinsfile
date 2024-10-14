@@ -6,7 +6,7 @@ pipeline {
             steps {
 
                 // Cloning the GitHub repository
-                git branch: 'development',
+                git branch: 'development-felix',
                     credentialsId: 'github-ssh-key',
                     url: 'git@github.com:software-deployment-pipeline/zoo-ticketing-system.git'
                
