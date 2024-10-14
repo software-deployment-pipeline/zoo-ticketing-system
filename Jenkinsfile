@@ -24,7 +24,7 @@ pipeline {
 
          stage('Run Unit Tests') {
             steps {
-                echo 'Running unit tests...'
+                echo 'Running unit tests..'
                 script {
                     dockerImage.inside {
                         sh 'python -m unittest discover -s tests/unit'
