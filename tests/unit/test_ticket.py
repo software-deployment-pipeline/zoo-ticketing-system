@@ -1,5 +1,5 @@
 import unittest
-from zoo_ticketing import Ticket, AdultTicket, ConcessionTicket  # Adjust import to match your project structure
+from app.zoo_ticketing import Ticket, AdultTicket, ConcessionTicket  # Adjust import to match your project structure
 
 class TestTicket(unittest.TestCase):
 

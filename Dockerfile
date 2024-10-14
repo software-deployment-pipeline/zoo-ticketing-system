@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y git
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY . /app
+COPY ./app /app
+COPY ./tests /app/tests
 
 CMD ["python", "zoo_ticketing.py"]
