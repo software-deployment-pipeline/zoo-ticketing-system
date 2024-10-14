@@ -22,7 +22,7 @@ pipeline {
                 echo 'Running unit tests...'
                 script {
                     // Use the jenkins pipeline@tmp directory for mounting
-                    dockerImage.inside('-v "C:/Users/LENOVO/AppData/Local/Jenkins/.jenkins/workspace/Zoo_Trial:/workspace"') {
+                    dockerImage.inside {
                         sh 'python -m unittest discover -s tests'
                     }
                 }
