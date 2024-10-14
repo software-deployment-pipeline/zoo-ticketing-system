@@ -21,16 +21,14 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                echo 'Running some tests...'
-                // Uncomment the following lines if you have tests inside the container
-                // Ensure you have Python and the right libraries installed in the Dockerfile
+                echo 'Running tests in Docker...'
                 script {
                     dockerImage.inside {
-                        sh 'python3 -m unittest discover -s tests'
-                    }
-                }
+                sh 'python3 -m unittest discover -s tests'
             }
         }
+    }
+}
 
         // Optional Deployment Stage
         // stage('Deploy to Production') {
