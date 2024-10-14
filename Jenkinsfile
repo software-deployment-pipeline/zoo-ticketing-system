@@ -45,9 +45,11 @@ pipeline {
 
         // stage('Deploy to Production') {
         //     steps {
-        //         // Deploying the Docker container to a production server
+        //         echo 'Deploying to production...'
         //         script {
-        //             dockerImage.push('your-dockerhub-repo/your-image-name')
+        //             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
+        //                 dockerImage.push('your-dockerhub-repo/your-image-name')
+        //             }
         //         }
         //     }
         // }
@@ -55,7 +57,8 @@ pipeline {
 
     post {
         always {
-            // Clean up after build
+            echo 'Cleaning up...'
+            // Clean up workspace
             cleanWs()
         }
     }
