@@ -21,9 +21,8 @@ pipeline {
             steps {
                 echo 'Running tests...'
                 script {
-                    // Manually mount the workspace and set working directory using PowerShell
                     powershell '''
-                    docker run --rm -v /c/Users/LENOVO/AppData/Local/Jenkins/.jenkins/workspace/jenkins_pipeline:/app -w /app zoo-ticketing pytest tests/test_sample.py
+                    docker run --rm -v /c/Users/LENOVO/AppData/Local/Jenkins/.jenkins/workspace/jenkins_pipeline:/app -w /app zoo-ticketing python -m unittest discover -s tests
                     '''
                 }
             }
