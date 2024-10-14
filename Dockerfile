@@ -9,4 +9,4 @@ WORKDIR /app
 COPY . /app
 RUN python -m unittest discover -s tests
 
-CMD ["python", "zoo-ticketing.py"]
+CMD ["python", "zoo_ticketing.py"]
