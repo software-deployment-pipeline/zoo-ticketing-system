@@ -83,9 +83,6 @@ pipeline {
                                 # Pull new Docker image
                                 docker pull felixjoshua/zoo_ticketing:latest
 
-                                # Run the new Docker image
-                                docker run -it felixjoshua/zoo_ticketing:latest
-
                                 echo "Deployment completed"
                             EOF
                         '''
