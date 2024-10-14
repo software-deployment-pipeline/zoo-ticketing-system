@@ -22,8 +22,9 @@ pipeline {
                 echo 'Running unit tests...'
                 script {
                     // Use the jenkins pipeline@tmp directory for mounting
-                    dockerImage.inside {
-                        sh 'python -m unittest discover -s tests'
+                    dockerImage.inside('-v /c/Users/LENOVO/AppData/Local/Jenkins/.jenkins/workspace/jenkins pipeline@tmp:/workspace') {
+                        // Adjust command for Windows
+                        bat 'python -m unittest discover -s tests'
                     }
                 }
             }
