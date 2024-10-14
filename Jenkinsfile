@@ -21,7 +21,9 @@ pipeline {
             steps {
                 echo 'Running unit tests...'
                 script {
-                    dockerImage.inside {
+                    // Convert Windows paths to Unix-style paths for Docker
+                    def workspaceUnixPath = "${env.WORKSPACE}".replace('\\', '/').replace('C:/', '/c/')
+                    dockerImage.inside("-w ${workspaceUnixPath}") {
                         sh 'python -m unittest discover -s tests'
                     }
                 }
