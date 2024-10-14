@@ -22,8 +22,8 @@ pipeline {
                 echo 'Running unit tests...'
                 script {
                     // Mount workspace to container using Docker on Windows
-                    dockerImage.inside('-v ${env.WORKSPACE}:/workspace') {
-                        sh 'python -m unittest discover -s tests'
+                    dockerImage.inside{
+                        sh 'pythn -m unittest discover -s tests'
                     }
                 }
             }
