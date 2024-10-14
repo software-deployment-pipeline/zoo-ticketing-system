@@ -35,7 +35,6 @@ pipeline {
                 echo 'Running integration tests...'
                 script {
                     dockerImage.inside {
-                        sh 'python zoo_ticketing.py > output.txt'  // Run the console app and save output
                         sh 'python -m unittest discover -s tests/integration'  // Run integration tests
                     }
                 }
