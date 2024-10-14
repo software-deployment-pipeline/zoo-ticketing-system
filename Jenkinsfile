@@ -21,7 +21,8 @@ pipeline {
             steps {
                 echo 'Running unit tests...'
                 script {
-                    dockerImage.inside {
+                    // Using Unix-style paths for Docker
+                    dockerImage.inside('-v /c/Users/LENOVO:/workspace') {
                         sh 'python -m unittest discover -s tests'
                     }
                 }
