@@ -17,6 +17,17 @@ pipeline {
             }
         }
 
+        stage('Run Tests') {
+            steps {
+                echo 'Running unit tests...'
+                script {
+                    dockerImage.inside {
+                        sh 'python -m unittest discover -s tests'
+                    }
+                }
+            }
+        }
+
         stage('Run Docker Container') {
             steps {
                 echo 'Running Docker container...'
