@@ -34,7 +34,7 @@ pipeline {
             steps {
                 echo 'Running integration tests...'
                 script {
-                        sh 'python zoo-ticketing.py > output.txt'  // Run the console app and save output
+                        sh 'python zoo_ticketing.py > output.txt'  // Run the console app and save output
                         sh 'python -m unittest discover -s tests/integration'  // Run integration tests
                 }
             }
