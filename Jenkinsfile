@@ -1,17 +1,6 @@
 pipeline {
     agent any
 
-      stages {
-        stage('Test Stage') {
-            steps {
-                echo 'This is a test stage to confirm the pipeline is working'
-            }
-        }
-
-        // Your other stages (Clone, Build Docker, etc.)
-    }
-}
-
     stages {
         stage('Clone Repository') {
             steps {
