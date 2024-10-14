@@ -46,7 +46,7 @@ pipeline {
 
         stage('Merge into main') {
             steps {
-                echo 'Merging into main...'
+                echo 'Merging into main..'
                 script {
                     sh 'git config --global user.email "jenkins@test.com"'
                     sh 'git config --global user.name "Jenkins CI"'
