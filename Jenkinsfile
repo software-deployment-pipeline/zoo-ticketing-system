@@ -17,7 +17,7 @@ pipeline {
             steps {
                 echo 'Building Docker image...'
                 script {
-                    dockerImage = docker.build("zoo_ticketing")
+                    dockerImage = docker.build("felixjoshua/zoo_ticketing")
                 }
             }
         }
@@ -53,23 +53,46 @@ pipeline {
                     sh 'git checkout main'
                     sh 'git merge origin/development-felix'                
                     sh 'git push origin main'
-                    
+                }
+                echo 'Code successfully merge..'
+            }
+        }
+
+        stage('Push to Docker Hub') {
+                steps {
+                    script {
+                        docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials-id') {
+                            dockerImage.push('latest')
+                        }
+                    }
                 }
             }
         }
 
-        // push to main branch?
+        stage('Deploy to Production') {
+            steps {
+                script {
+                    // SSH into EC2 instance and deploy
+                    sshagent(credentials: ['ec2-ssh-key']) {
+                        sh '''
+                            ssh -o StrictHostKeyChecking=no ec2-user@3.106.213.115 << EOF
+                                # Stop existing application
+                                docker stop zoo-ticketing || true
+                                docker rm zoo-ticketing || true
 
-        // stage('Deploy to Production') {
-        //     steps {
-        //         echo 'Deploying to production...'
-        //         script {
-        //             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
-        //                 dockerImage.push('your-dockerhub-repo/your-image-name')
-        //             }
-        //         }
-        //     }
-        // }
+                                # Pull new Docker image
+                                docker pull felixjoshua/zoo-ticketing:latest
+
+                                # Run the new Docker image
+                                docker run -d -p 80:8080 --name zoo-ticketing your-docker-repo/zoo-ticketing:latest
+
+                                echo "Deployment completed"
+                            EOF
+                        '''
+                    }
+                }
+            }
+        }
     }
 
     post {
