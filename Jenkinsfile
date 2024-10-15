@@ -17,17 +17,6 @@ pipeline {
             }
         }
 
-         stage('Run Tests') {
-            steps {
-                echo 'Running tests...'
-                script {
-                    powershell '''
-                    docker run --rm -v /c/Users/LENOVO/AppData/Local/Jenkins/.jenkins/workspace/jenkins_pipeline:/app -w /app zoo-ticketing python -m unittest discover -s tests
-                    '''
-                }
-            }
-        }
-
         stage('Run Tests') {
             steps {
                 echo 'Running tests...'
