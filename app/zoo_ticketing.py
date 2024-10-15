@@ -5,7 +5,7 @@ class Ticket:
         
 class AdultTicket(Ticket):
     def __init__(self):
-        super().__init__(20)
+        super().__init__(15)
     
 
 class ConcessionTicket(Ticket):
