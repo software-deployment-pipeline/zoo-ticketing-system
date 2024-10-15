@@ -14,7 +14,7 @@ class TestTicket(unittest.TestCase):
         self.assertEqual(concession_ticket.cost, 10)
 
     def test_ticket_cost_is_set_correctly(self):
-        """Test that the cost of a general ticket can be set"""
+        """Test that the cost of ticket can be set"""
         ticket = Ticket(15)
         self.assertEqual(ticket.cost, 15)
 
