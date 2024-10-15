@@ -24,6 +24,12 @@ pipeline {
                     powershell '''
                     docker run --rm -v /c/Users/LENOVO/AppData/Local/Jenkins/.jenkins/workspace/jenkins_pipeline:/app -w /app zoo-ticketing python -m unittest discover -s tests
                     '''
+                    powershell '''
+                    docker run --rm -v /c/Users/LENOVO/AppData/Local/Jenkins/.jenkins/workspace/jenkins_pipeline:/app -w /app zoo-ticketing python -m unittest discover -s tests/unit
+                    '''
+                    powershell '''
+                    docker run --rm -v /c/Users/LENOVO/AppData/Local/Jenkins/.jenkins/workspace/jenkins_pipeline:/app -w /app zoo-ticketing python -m unittest discover -s tests/integration
+                    '''
                 }
             }
         }
